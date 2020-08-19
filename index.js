@@ -1,35 +1,46 @@
+const net = require('net');
 const fs = require('fs');
-const path = require('path');
+const path = require('path')
 
-const from = path.resolve(__dirname, './1.txt');
-const to = path.resolve(__dirname, './2.txt');
+const server = net.createServer();
 
-// const rs = fs.createReadStream(from);
-// const ws = fs.createWriteStream(to);
-// console.time('方式一')
-// rs.on('data',chunk=>{
-//     let flag = ws.write(chunk);
-//     if(!flag){
-//         rs.pause()
-//     }
-// })
+server.listen(9527); //服务器监听9537端口
 
-// ws.on('drain',()=>{
-//     rs.resume()
-// })
+server.on('listening', () => {
+    console.log('server listening 9527')
+})
 
-// console.time('方式二')
-// rs.pipe(ws)
+server.on('connection', socket => {
+    // console.log('有客户端连接到服务器了');
 
-// rs.on('end',()=>{
-//     console.log('复制完成');
-//     // console.timeEnd('方式一');
-//     console.timeEnd('方式二')
-// })
+    socket.on('data',async chunk => {
+        // console.log(chunk.toString('utf-8'));
+        //写入html文件
+        //     socket.write(`HTTP/1.1 200 OK
+        // Date: Wed, 19 Aug 2020 02:18:33 GMT
+        // Content-Type: text/html; charset=utf-8
+        // Connection: keep-alive
 
-console.time('方式三');
-fs.promises.readFile(from).then(data => {
-    fs.promises.writeFile(to, data).then(() => {
-        console.timeEnd('方式三')
+        // <!doctype html><html><head><body>
+        // <h1>你好呀</h1> 
+        // </body></html>    
+        //     `)
+
+        // 返回一张图片
+        let pathname = path.resolve(__dirname, './hsq.jpg');
+        let imgBuffer = await fs.promises.readFile(pathname);
+        let headBuffer = Buffer.from(`HTTP/1.1 200 OK
+Content-Type: image/jpeg
+
+`, "utf-8");
+        let result = Buffer.concat([headBuffer, imgBuffer])
+        socket.write(result)
+        socket.end()
+
+    });
+
+
+    server.on('close', () => {
+        console.log('连接断开啦')
     })
-});
+})
