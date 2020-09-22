@@ -1,43 +1,26 @@
-mysql2  运行效率比较高
+# Sequelize简介
 
-mysql 是官方的
+## ORM
 
-1. 安装
+Object Relational Mapping 对象关系映射
 
-npm i mysql2
+通过ORM框架，可以自动的把程序中的对象和数据库关联
 
-2. 导入
+ORM框架会隐藏具体的数据库底层细节，让开发者使用同样的数据操作接口，完成对不同数据库的操作
 
-3. 创建一个数据库连接
-   1. host  主机（ip或域名）
-   2. user  数据库的账号
-   3. password 数据库的密码
-   4. database 数据库的名称
-   5. multipleStatements:true  可以运行多条sql语句，默认只能默认一条sql语句
+ORM的优势：
 
-connection.end() 断开连接
+1. 开发者不用关心数据库，仅需关心对象
+2. 可轻易的完成数据库的移植
+3. 无须拼接复杂的sql语句即可完成精确查询
 
-4. 运行sql语句
+## Node中的ORM
 
-connection.query('sql语句',callback)
+1. Sequelize框架
+   1. JS
+   2. TS
+   3. 成熟
 
-回调函数第一个参数为错误，第二个参数为响应的数据
-
-> 还可以使用promise的方式来操作数据库
-
-> 防止mql注入，使用execute而不使用query来运行sql语句
-
-**使用连接池**
-
-```js
-const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    database: 'test',
-    waitForConnections:true,
-    connectionLimit:10,//最大的连接数量
-    queueLimit:0//0代表不限制排队的长度
-})
-```
-
-不用手动去断开连接，会自动断开
+2. TypeORM框架
+   1. TS
+   2. 不成熟
