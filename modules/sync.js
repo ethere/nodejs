@@ -1,5 +1,5 @@
 const sequelize = require('./db');
-require('./User');
+require('./Admin');
 const Student = require('./Student');
 const Class = require('./Class');
 require('./Book');

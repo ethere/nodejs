@@ -1,7 +1,7 @@
 const sequelize = require('./db');
 const { DataTypes } = require('sequelize');
 
-module.exports =  sequelize.define('User',{
+module.exports =  sequelize.define('Admin',{
     account:{
         type:DataTypes.STRING,
         allowNull:false
