@@ -1,17 +1,16 @@
 const Admin = require('../modules/Admin');
 
-exports.addAdmin = async function(adminObj){
-   //方式一
-//    const ins = Admin.build(adminObj);
-//    await ins.save();
+exports.addAdmin = async function (adminObj) {
+    //方式一
+    //    const ins = Admin.build(adminObj);
+    //    await ins.save();
 
-   //方式二
-   const ins = await Admin.create(adminObj);
+    //方式二
+    const ins = await Admin.create(adminObj);
 
-   console.log('已添加到数据库啦')
-   return ins.toJSON()
+    return ins.toJSON()
 }
-exports.deleteAdmin = async function(adminId){
+exports.deleteAdmin = async function (adminId) {
     //方式一
     // const ins = await Admin.findByPk(adminId);
     // if(ins){
@@ -19,23 +18,30 @@ exports.deleteAdmin = async function(adminId){
     // }
 
     //方式二
-    Admin.destroy({
-        where:adminId
+    const ins = await Admin.destroy({
+        where: {
+            id:adminId
+        }
     })
-    console.log('删除成功啦');
+
+    console.log('删除成功啦')
     return ins;
 }
-exports.updateAdmin = async function(adminId,adminObj){
-    //方式一
-    const ins = Admin.findByPk(adminId);
-    ins.name = adminObj.name;
-    ins.password = adminObj.password;
-    
-    //方式二
-    Admin.update({
-        where:adminId,
-        adminObj
-    })
-    console.log('更新成功啦')
-    return res;
+exports.updateAdmin = async function (id, adminObj) {
+    // 方式1
+    // 1. 得到实例
+    // const ins = await Admin.findByPk(id);
+    // ins.name = adminObj.name;
+    // // 2. 保存
+    // ins.save();
+
+    // 方式2
+    const result = await Admin.update(adminObj, {
+        where: {
+            id,
+        },
+    });
+
+    console.log("更新成功啦")
+    return result;
 }
