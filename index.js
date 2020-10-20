@@ -1,1 +1,1 @@
-require('./mock/mockAdmin')
+require("./spider/fetchBooks")
