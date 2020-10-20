@@ -1,4 +1,4 @@
-const Student = require('../modules/Student');
+const Student = require('../models/Student');
 
 exports.addStudent = async function(obj){
     return await Student.create(obj)

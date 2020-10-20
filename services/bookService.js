@@ -1,4 +1,4 @@
-const Book = require('../modules/Book');
+const Book = require('../models/Book');
 
 exports.addBook = async function(bookObj){
     //方式一

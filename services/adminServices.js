@@ -1,4 +1,4 @@
-const Admin = require('../modules/Admin');
+const Admin = require('../models/Admin');
 
 exports.addAdmin = async function (adminObj) {
     //方式一

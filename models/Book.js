@@ -1,8 +1,7 @@
 const sequelize = require('./db');
 const { DataTypes } = require('sequelize');
-const { toUnicode } = require('punycode');
 
-module.exports = sequelize.define('Book',{
+const Book = sequelize.define('Book',{
     img:{
         type:DataTypes.STRING,
         allowNull:false
@@ -16,7 +15,7 @@ module.exports = sequelize.define('Book',{
         allowNull:false
     },
     time:{
-        type:DataTypes.TIME,
+        type:DataTypes.STRING,
         allowNull:false
     }
 },{
@@ -24,3 +23,4 @@ module.exports = sequelize.define('Book',{
     updatedAt:false,
     paranoid:true//从此以后，该表的数据不会真正的删除，而是增加一列deleteAt，记录删除的时间
 })
+module.exports = Book;

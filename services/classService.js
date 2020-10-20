@@ -1,4 +1,4 @@
-const Class = require('../modules/Class.js');
+const Class = require('../models/Class.js');
 
 exports.addClass = async function(obj){
     return await Class.create(obj)
