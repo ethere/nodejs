@@ -17,3 +17,15 @@ exports.updateClass = async function(id,obj){
         }
     })
 }
+exports.getCount = async function(){
+    const result = await Class.count();
+    return result;
+}
+exports.getClass = async function(){
+    const result = await Class.findAll();
+    return JSON.parse(JSON.stringify(result));
+}
+exports.getClassById = async function(id){
+    const result = await Class.findByPk(id);
+    return result.toJSON();
+}

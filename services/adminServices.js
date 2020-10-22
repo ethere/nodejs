@@ -45,3 +45,31 @@ exports.updateAdmin = async function (id, adminObj) {
     console.log("更新成功啦")
     return result;
 }
+
+exports.login = async function (name,password){
+   const result = await Admin.findOne({
+        where:{
+            name,
+            password,
+        }
+    });
+    if(result && result.name === name && result.password === password){
+        return result.toJSON();
+    }
+    return null;
+}
+
+exports.getAllAdmin = async function(){
+    const result = await Admin.findAll();
+    return JSON.parse(JSON.stringify(result))
+}
+
+exports.findById = async function (id){
+    const result = await Admin.findByPk(id);
+    return result.toJSON()
+}
+
+exports.getCount = async function(){
+    const result = await Admin.count();
+    return result;
+}
